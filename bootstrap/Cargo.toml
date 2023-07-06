@@ -1,0 +1,11 @@
+[package]
+authors = ["OnlyDust <tech@onlydust.xyz>"]
+description = "Bootstrap to configure and start the application"
+edition = "2021"
+name = "bootstrap"
+repository = "https://github.com/onlydustxyz/od-rust-template"
+version = "1.0.0"
+
+[dependencies]
+rest-api-adapter= {path="../application/rest-api-adapter"}
+rocket = { version = "=0.5.0-rc.3" }

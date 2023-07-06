@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+  "application/rest-api-adapter",
+  "bootstrap"
+]
