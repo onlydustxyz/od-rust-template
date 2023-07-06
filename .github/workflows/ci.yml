@@ -1,0 +1,106 @@
+name: Backend CI
+
+on:
+  pull_request: ~
+  push:
+    branches:
+      - "*"
+jobs:
+  format:
+    name: Check code formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install nightly toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          components: rustfmt
+          override: true
+
+      - name: Check code formatting
+        run: cargo +nightly fmt -- --check
+
+      - name: Check codecov.yml file format
+        run: curl --data-binary @- https://codecov.io/validate < codecov.yml
+
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup cargo
+        uses: ./.github/actions/cargo-setup
+
+      - name: Check application
+        uses: actions-rs/cargo@v1
+        with:
+          command: check
+
+  build:
+    name: Compile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup cargo
+        uses: ./.github/actions/cargo-setup
+
+      - name: Compile application
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+
+  lint:
+    name: Clippy checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup cargo
+        uses: ./.github/actions/cargo-setup
+
+      - name: Setup clippy
+        run: rustup component add clippy
+
+      - name: Annotate commit with clippy warnings
+        uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --bins --tests --examples -- -D warnings
+
+#  unit_tests:
+#    name: Unit tests
+#    runs-on: ubuntu-latest-4-cores
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v3
+#
+#      - name: Setup cargo
+#        uses: ./.github/actions/cargo-setup
+#
+#      - name: Setup environment
+#        uses: ./.github/actions/env-setup
+#
+#      - name: Run migrations
+#        uses: ./.github/actions/migrations-run
+#
+#      - name: Run tests
+#        uses: ./.github/actions/coverage-checks
+#
+#      - name: Setup tmate session for debugging
+#        uses: mxschmitt/action-tmate@v3
+#        if: ${{ failure() && inputs.debug_enabled }}
+#
+#      - name: Upload coverage results
+#        uses: ./.github/actions/coverage-upload
+#        with:
+#          codecov_token: ${{ secrets.CODECOV_TOKEN }}
+#          codecov_flag: unittest
+#          file: cobertura.xml
