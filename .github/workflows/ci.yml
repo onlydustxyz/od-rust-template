@@ -23,8 +23,8 @@ jobs:
       - name: Check code formatting
         run: cargo +nightly fmt -- --check
 
-      - name: Check codecov.yml file format
-        run: curl --data-binary @- https://codecov.io/validate < codecov.yml
+#      - name: Check codecov.yml file format
+#        run: curl --data-binary @- https://codecov.io/validate < codecov.yml
 
   check:
     name: Check
