@@ -3,8 +3,8 @@ use uuid::Uuid;
 
 #[derive(Getters)]
 pub struct User {
-	id: Uuid,
-	name: String,
+	pub id: Uuid,
+	pub name: String,
 }
 
 impl User {

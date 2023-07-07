@@ -11,3 +11,4 @@ rest-api-adapter = { path = "../application/rest-api-adapter" }
 domain = { path = "../domain" }
 postgres-adapter = { path = "../infrastructure/postgres-adapter" }
 rocket = { version = "=0.5.0-rc.3" }
+mockall = "0.11.4"
