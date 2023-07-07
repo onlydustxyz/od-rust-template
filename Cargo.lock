@@ -108,6 +108,8 @@ checksum = "630be753d4e58660abd17930c71b647fe46c27ea6b63cc59e1e3851406972e42"
 name = "bootstrap"
 version = "1.0.0"
 dependencies = [
+ "domain",
+ "postgres-adapter",
  "rest-api-adapter",
  "rocket",
 ]
@@ -746,6 +748,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
 
 [[package]]
+name = "postgres-adapter"
+version = "1.0.0"
+dependencies = [
+ "domain",
+]
+
+[[package]]
 name = "ppv-lite86"
 version = "0.2.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -889,6 +898,7 @@ checksum = "2ab07dc67230e4a4718e70fd5c20055a4334b121f1f9db8fe63ef39ce9b8c846"
 name = "rest-api-adapter"
 version = "1.0.0"
 dependencies = [
+ "domain",
  "rocket",
 ]
 

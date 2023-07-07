@@ -1,7 +1,8 @@
 [workspace]
 
 members = [
-  "domain",
   "application/rest-api-adapter",
+  "domain",
+  "infrastructure/postgres-adapter",
   "bootstrap"
 ]

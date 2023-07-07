@@ -1,13 +1,12 @@
 [package]
 authors = ["OnlyDust <tech@onlydust.xyz>"]
-description = "Rest-api-adapter implementing the domain input ports"
+description = "Postgres-adapter implementing the domain output ports"
 edition = "2021"
-name = "rest-api-adapter"
+name = "postgres-adapter"
 repository = "https://github.com/onlydustxyz/od-rust-template"
 version = "1.0.0"
 
 [lib]
 
 [dependencies]
-rocket = { version = "=0.5.0-rc.3", features = ["json"] }
 domain = { path = "../../domain" }

@@ -7,5 +7,7 @@ repository = "https://github.com/onlydustxyz/od-rust-template"
 version = "1.0.0"
 
 [dependencies]
-rest-api-adapter= {path="../application/rest-api-adapter"}
+rest-api-adapter = { path = "../application/rest-api-adapter" }
+domain = { path = "../domain" }
+postgres-adapter = { path = "../infrastructure/postgres-adapter" }
 rocket = { version = "=0.5.0-rc.3" }

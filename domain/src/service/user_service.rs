@@ -6,7 +6,7 @@ use crate::{
 };
 
 pub struct UserService {
-	user_storage_port: Arc<dyn UserStoragePort>,
+	pub user_storage_port: Arc<dyn UserStoragePort>,
 }
 
 impl UserFacadePort for UserService {
