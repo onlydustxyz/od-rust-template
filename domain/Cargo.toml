@@ -1,0 +1,9 @@
+[package]
+authors = ["OnlyDust <tech@onlydust.xyz>"]
+description = "Domain"
+edition = "2021"
+name = "domain"
+repository = "https://github.com/onlydustxyz/od-rust-template"
+version = "1.0.0"
+
+[lib]

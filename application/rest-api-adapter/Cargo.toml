@@ -9,4 +9,4 @@ version = "1.0.0"
 [lib]
 
 [dependencies]
-rocket = { version = "=0.5.0-rc.3" }
+rocket = { version = "=0.5.0-rc.3", features = ["json"] }
