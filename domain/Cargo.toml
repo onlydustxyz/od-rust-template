@@ -7,3 +7,14 @@ repository = "https://github.com/onlydustxyz/od-rust-template"
 version = "1.0.0"
 
 [lib]
+
+[dependencies.uuid]
+version = "1.4.0"
+features = [
+    "v4",                # Lets you generate random UUIDs
+    "fast-rng",          # Use a faster (but still sufficiently random) RNG
+    "macro-diagnostics", # Enable better diagnostics for compile-time UUIDs
+]
+
+[dependencies]
+derive-getters = "0.3.0"

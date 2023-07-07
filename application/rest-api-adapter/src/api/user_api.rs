@@ -1,6 +1,6 @@
+use rocket::{post, serde::json::Json, Build, Rocket};
+
 use crate::dto::user_dto_request::UserDtoRequest;
-use rocket::serde::json::Json;
-use rocket::{post, Build, Rocket};
 
 #[post("/user", format = "application/json", data = "<user_dto_request>")]
 async fn post_user(user_dto_request: Json<UserDtoRequest>) {
