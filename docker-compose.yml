@@ -1,0 +1,14 @@
+version: '3.2'
+
+services:
+  database:
+    image: "postgres:13"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Passw0rd
+      - POSTGRES_DB=od-rust-template
+    ports:
+      - "5432:5432"
+
+
+

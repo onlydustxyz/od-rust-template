@@ -10,3 +10,15 @@ version = "1.0.0"
 
 [dependencies]
 domain = { path = "../../domain" }
+diesel = { version = "2.1.0", features = ["postgres","uuid"] }
+diesel_migrations = "2.1.0"
+r2d2 = "0.8.10"
+
+[dependencies.uuid]
+version = "1.4.0"
+features = [
+    "v4", # Lets you generate random UUIDs
+    "fast-rng", # Use a faster (but still sufficiently random) RNG
+    "macro-diagnostics", # Enable better diagnostics for compile-time UUIDs
+    "serde",
+]

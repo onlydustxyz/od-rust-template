@@ -5,6 +5,7 @@ pub struct PostgresUserAdapter {}
 impl UserStoragePort for PostgresUserAdapter {
 	fn create_user(&self, user: User) -> Result<User, String> {
 		println!("Saving user for name {}", user.name());
+
 		Ok(user)
 	}
 }
