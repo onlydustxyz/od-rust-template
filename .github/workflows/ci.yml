@@ -7,57 +7,7 @@ on:
       - "*"
 jobs:
   format:
-    name: Check code formatting
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install nightly toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: nightly
-          components: rustfmt
-          override: true
-
-      - name: Check code formatting
-        run: cargo +nightly fmt -- --check
-
-#      - name: Check codecov.yml file format
-#        run: curl --data-binary @- https://codecov.io/validate < codecov.yml
-
-  check:
-    name: Check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup cargo
-        uses: ./.github/actions/cargo-setup
-
-      - name: Check application
-        uses: actions-rs/cargo@v1
-        with:
-          command: check
-
-  build:
-    name: Compile
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup cargo
-        uses: ./.github/actions/cargo-setup
-
-      - name: Compile application
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-
-  lint:
-    name: Clippy checks
+    name: Rust CI
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -69,11 +19,28 @@ jobs:
       - name: Setup clippy
         run: rustup component add clippy
 
-      - name: Annotate commit with clippy warnings
-        uses: actions-rs/clippy-check@v1
+      - name: Install nightly toolchain
+        uses: actions-rs/toolchain@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --bins --tests --examples -- -D warnings
+          toolchain: nightly
+          components: rustfmt,clippy
+          override: true
+
+      - name: Check code formatting
+        run: cargo +nightly fmt -- --check
+
+      - name: Run clippy
+        run: cargo clippy
+
+      - name: Compile application
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+
+      - name: Test application
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
 
 #  unit_tests:
 #    name: Unit tests

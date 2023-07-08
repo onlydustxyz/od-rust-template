@@ -57,7 +57,7 @@ mod tests {
 			"name": user_name
 		});
 		let user_stub = User::create_user_from_name(user_name.clone());
-		let user_id = user_stub.id.clone();
+		let user_id = user_stub.id;
 		let mock = UserFacadeMock { user: user_stub };
 		let rocket_builder = UserApi {}.build_api(rocket::build(), Arc::new(mock));
 
@@ -85,7 +85,7 @@ mod tests {
 		fn create_user(&self, name: String) -> Result<User, String> {
 			Ok(User {
 				name: name.to_string(),
-				id: self.user.id.clone(),
+				id: self.user.id,
 			})
 		}
 	}
