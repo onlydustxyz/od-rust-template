@@ -1,21 +1,23 @@
 use diesel::{Connection, PgConnection};
 use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 
+use crate::config::postgres_configuration::PostgresConfiguration;
+
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!();
 
 pub struct PostgresClient {
-	pub user: String,
-	pub password: String,
-	pub host: String,
-	pub port: String,
-	pub database: String,
+	pub postgres_configuration: PostgresConfiguration,
 }
 
 impl PostgresClient {
 	pub fn establish_connection(&self) -> PgConnection {
 		let database_url = format!(
 			"postgres://{}:{}@{}:{}/{}",
-			&self.user, &self.password, &self.host, &self.port, &self.database
+			&self.postgres_configuration.user,
+			&self.postgres_configuration.password,
+			&self.postgres_configuration.host,
+			&self.postgres_configuration.port,
+			&self.postgres_configuration.database
 		);
 
 		PgConnection::establish(&database_url)
