@@ -21,7 +21,7 @@ impl UserApi {
 			println!("User name : {}", user_dto_request.name);
 
 			user_facade_port
-				.create_user("test".to_string())
+				.create_user(user_dto_request.name.to_string())
 				.map(|user_created| {
 					Json(UserDtoResponse {
 						id: *user_created.id(),
@@ -41,16 +41,13 @@ mod tests {
 
 	use domain::{model::user::User, port::input::user_facade_port::UserFacadePort};
 	use fake::{Fake, Faker};
-	use mockall::{predicate::*, *};
 	use rocket::{
 		http::{ContentType, Status},
 		local::blocking::Client,
-		serde::json::{json, Json},
-		Response,
+		serde::json::json,
 	};
-	use serde_json::json as serde_json;
 
-	use crate::{api::user_api::UserApi, dto::user_dto_response::UserDtoResponse, rocket};
+	use crate::{api::user_api::UserApi, rocket};
 
 	#[test]
 	fn should_post_create_user() {
@@ -86,9 +83,8 @@ mod tests {
 
 	impl UserFacadePort for UserFacadeMock {
 		fn create_user(&self, name: String) -> Result<User, String> {
-			self.user.name.to_string();
 			Ok(User {
-				name: self.user.name.to_string(),
+				name: name.to_string(),
 				id: self.user.id.clone(),
 			})
 		}
