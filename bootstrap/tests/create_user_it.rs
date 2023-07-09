@@ -2,24 +2,15 @@ mod common;
 
 #[cfg(test)]
 mod tests {
-	use std::{collections::HashMap, process::Command, sync::Arc, time::Duration};
-
 	use bootstrap::bootstrap;
-	use domain::{model::user::User, port::input::user_facade_port::UserFacadePort};
 	use fake::{Fake, Faker};
 	use postgres_adapter::config::postgres_configuration::PostgresConfiguration;
-	use rest_api_adapter::{api::user_api::UserApi, rocket};
 	use rocket::{
 		http::{ContentType, Status},
 		local::blocking::Client,
 		serde::json::json,
 	};
-	use testcontainers::{
-		clients,
-		core::WaitFor,
-		images::{generic, generic::GenericImage, postgres},
-		Container,
-	};
+	use testcontainers::{clients, core::WaitFor, images::generic::GenericImage};
 
 	struct IntegrationTestSetup {}
 
