@@ -11,9 +11,7 @@ use rest_api_adapter::api::user_api::UserApi;
 use rocket::{Build, Rocket};
 
 pub fn bootstrap(postgres_configuration: PostgresConfiguration) -> Rocket<Build> {
-	let postgres_client = PostgresClient {
-		postgres_configuration,
-	};
+	let postgres_client = PostgresClient::build(postgres_configuration);
 	postgres_client.run_migrations();
 	let user_storage_port = Arc::new(PostgresUserAdapter { postgres_client });
 	let user_facade_port = Arc::new(UserService { user_storage_port });
