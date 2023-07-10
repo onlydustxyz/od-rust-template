@@ -8,8 +8,8 @@ use crate::{
 	},
 };
 
-struct OrganizationService {
-	organization_storage_port: Arc<dyn OrganizationStoragePort>,
+pub struct OrganizationService {
+	pub organization_storage_port: Arc<dyn OrganizationStoragePort>,
 }
 
 impl OrganizationFacadePort for OrganizationService {

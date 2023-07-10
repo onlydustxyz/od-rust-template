@@ -1,22 +1,17 @@
 use std::sync::Arc;
 
 use domain::port::input::organization_facade_port::OrganizationFacadePort;
-use hex_literal::hex;
-use hmac::{Hmac, Mac};
 use rocket::{Build, Rocket, State};
-use sha2::Sha256;
 
 use crate::webhook::{
 	github_event_dto, github_event_dto::GithubEventDto, github_metadata::GithubEventMetadata,
 };
 
-pub struct GithubWebhookAdapter {
-	organization_facade_port: Box<dyn OrganizationFacadePort>,
-	github_signature_secret: String,
-}
+pub struct GithubWebhookAdapter {}
 
 impl GithubWebhookAdapter {
-	pub fn attach_webhook(
+	pub fn build_webhook(
+		&self,
 		rocket_builder: Rocket<Build>,
 		organization_facade_port: Arc<dyn OrganizationFacadePort>,
 	) -> Rocket<Build> {
@@ -86,7 +81,7 @@ mod tests {
 		.unwrap();
 		let mut github_event_as_string = String::new();
 		file.read_to_string(&mut github_event_as_string).unwrap();
-		let rocket_builder = GithubWebhookAdapter::attach_webhook(
+		let rocket_builder = GithubWebhookAdapter {}.build_webhook(
 			rocket::build(),
 			Arc::new(OrganizationFacadeDummy {
 				expected_name: "Barbicane-fr".to_string(),

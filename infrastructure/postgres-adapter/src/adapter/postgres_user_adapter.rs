@@ -1,3 +1,5 @@
+use std::sync::Arc;
+
 use diesel::{prelude::*, RunQueryDsl};
 use domain::{model::user::User, port::output::user_storage_port::UserStoragePort};
 
@@ -7,7 +9,7 @@ use crate::{
 };
 
 pub struct PostgresUserAdapter {
-	pub postgres_client: PostgresClient,
+	pub postgres_client: Arc<PostgresClient>,
 }
 
 impl UserStoragePort for PostgresUserAdapter {

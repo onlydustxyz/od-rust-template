@@ -156,6 +156,7 @@ version = "1.0.0"
 dependencies = [
  "domain",
  "fake",
+ "github-webhook-adapter",
  "mockall",
  "postgres-adapter",
  "rest-api-adapter",
