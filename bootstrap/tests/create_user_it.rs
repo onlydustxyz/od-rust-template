@@ -11,7 +11,7 @@ mod tests {
 		local::blocking::Client,
 		serde::json::json,
 	};
-	use testcontainers::{clients, clients::Cli, Container};
+	use testcontainers::clients::Cli;
 
 	use crate::common::integration_test_setup::IntegrationTestSetup;
 

@@ -42,12 +42,6 @@ impl GithubWebhookAdapter {
 			.manage(organization_facade_port)
 			.mount("/api/v1", routes![consume_webhook])
 	}
-
-	fn handle_github_event(&self, github_event_as_string: String) {
-		let github_event_dto: GithubEventDto =
-			serde_json::from_str(&github_event_as_string).unwrap();
-		println!("{}", github_event_dto.action);
-	}
 }
 
 #[cfg(test)]

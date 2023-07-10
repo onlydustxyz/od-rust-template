@@ -39,8 +39,12 @@ impl UserApi {
 mod tests {
 	use std::sync::Arc;
 
-	use domain::{model::user::User, port::input::user_facade_port::UserFacadePort};
+	use domain::{
+		model::user::User,
+		port::input::user_facade_port::{MockUserFacadePort, UserFacadePort},
+	};
 	use fake::{Fake, Faker};
+	use mockall::{mock, predicate};
 	use rocket::{
 		http::{ContentType, Status},
 		local::blocking::Client,
@@ -58,7 +62,11 @@ mod tests {
 		});
 		let user_stub = User::create_user_from_name(user_name.clone());
 		let user_id = user_stub.id;
-		let mock = UserFacadeMock { user: user_stub };
+		let mut mock = MockUserFacadePort::new();
+		mock.expect_create_user()
+			.once()
+			.with(predicate::eq(user_name.to_string()))
+			.return_once(|_| Ok(user_stub));
 		let rocket_builder = UserApi {}.build_api(rocket::build(), Arc::new(mock));
 
 		// When
@@ -77,16 +85,19 @@ mod tests {
 		)
 	}
 
-	struct UserFacadeMock {
-		user: User,
-	}
-
-	impl UserFacadePort for UserFacadeMock {
-		fn create_user(&self, name: String) -> Result<User, String> {
-			Ok(User {
-				name: name.to_string(),
-				id: self.user.id,
-			})
-		}
-	}
+	// struct UserFacadeMock {
+	// 	user: User,
+	// 	expected_name: String
+	// }
+	//
+	// impl UserFacadePort for UserFacadeMock {
+	// 	fn create_user(&self, name: String) -> Result<User, String> {
+	// 		let user = User {
+	// 			name: name.to_string(),
+	// 			id: self.user.id,
+	// 		};
+	//
+	// 		Ok(user)
+	// 	}
+	// }
 }

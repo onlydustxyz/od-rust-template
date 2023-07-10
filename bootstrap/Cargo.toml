@@ -13,7 +13,11 @@ domain = { path = "../domain" }
 postgres-adapter = { path = "../infrastructure/postgres-adapter" }
 rocket = { version = "=0.5.0-rc.3" }
 diesel = "2.1.0"
+amqprs = "1.4.0"
+async-global-executor = "2.3.1"
+tracing-subscriber = "0.3.17"
 # Test
 mockall = "0.11.4"
 testcontainers = "0.14.0"
 fake = "2.6.1"
+tokio = "1.29.1"
