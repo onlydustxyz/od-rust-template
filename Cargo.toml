@@ -2,6 +2,7 @@
 
 members = [
   "application/rest-api-adapter",
+  "application/github-webhook-adapter",
   "domain",
   "infrastructure/postgres-adapter",
   "bootstrap"
