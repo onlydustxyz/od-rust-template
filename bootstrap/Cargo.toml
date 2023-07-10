@@ -12,6 +12,7 @@ github-webhook-adapter = { path = "../application/github-webhook-adapter" }
 domain = { path = "../domain" }
 postgres-adapter = { path = "../infrastructure/postgres-adapter" }
 rocket = { version = "=0.5.0-rc.3" }
+diesel = "2.1.0"
 # Test
 mockall = "0.11.4"
 testcontainers = "0.14.0"

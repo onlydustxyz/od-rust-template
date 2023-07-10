@@ -3,9 +3,7 @@ use std::sync::Arc;
 use domain::port::input::organization_facade_port::OrganizationFacadePort;
 use rocket::{Build, Rocket, State};
 
-use crate::webhook::{
-	github_event_dto, github_event_dto::GithubEventDto, github_metadata::GithubEventMetadata,
-};
+use crate::webhook::{github_event_dto::GithubEventDto, github_metadata::GithubEventMetadata};
 
 pub struct GithubWebhookAdapter {}
 

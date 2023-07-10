@@ -1,0 +1,114 @@
+{
+  "action": "created",
+  "installation": {
+    "id": 27476584,
+    "account": {
+      "login": "Barbicane-fr",
+      "id": 58205251,
+      "node_id": "MDEyOk9yZ2FuaXphdGlvbjU4MjA1MjUx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58205251?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Barbicane-fr",
+      "html_url": "https://github.com/Barbicane-fr",
+      "followers_url": "https://api.github.com/users/Barbicane-fr/followers",
+      "following_url": "https://api.github.com/users/Barbicane-fr/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Barbicane-fr/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Barbicane-fr/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Barbicane-fr/subscriptions",
+      "organizations_url": "https://api.github.com/users/Barbicane-fr/orgs",
+      "repos_url": "https://api.github.com/users/Barbicane-fr/repos",
+      "events_url": "https://api.github.com/users/Barbicane-fr/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Barbicane-fr/received_events",
+      "type": "Organization",
+      "site_admin": false
+    },
+    "repository_selection": "all",
+    "access_tokens_url": "https://api.github.com/app/installations/27476584/access_tokens",
+    "repositories_url": "https://api.github.com/installation/repositories",
+    "html_url": "https://github.com/organizations/Barbicane-fr/settings/installations/27476584",
+    "app_id": 220162,
+    "app_slug": "symeo-staging-io",
+    "target_id": 58205251,
+    "target_type": "Organization",
+    "permissions": {
+      "checks": "read",
+      "actions": "read",
+      "members": "read",
+      "contents": "read",
+      "metadata": "read",
+      "statuses": "read",
+      "deployments": "read",
+      "discussions": "read",
+      "merge_queues": "read",
+      "pull_requests": "read",
+      "administration": "read",
+      "team_discussions": "read",
+      "repository_projects": "read",
+      "organization_projects": "read",
+      "organization_administration": "read"
+    },
+    "events": [
+
+    ],
+    "created_at": "2022-07-18T08:20:45.000+02:00",
+    "updated_at": "2022-07-18T08:20:45.000+02:00",
+    "single_file_name": null,
+    "has_multiple_single_files": false,
+    "single_file_paths": [
+
+    ],
+    "suspended_by": null,
+    "suspended_at": null
+  },
+  "repositories": [
+    {
+      "id": 220655075,
+      "node_id": "MDEwOlJlcG9zaXRvcnkyMjA2NTUwNzU=",
+      "name": "image-to-template-api",
+      "full_name": "Barbicane-fr/image-to-template-api",
+      "private": true
+    },
+    {
+      "id": 226522895,
+      "node_id": "MDEwOlJlcG9zaXRvcnkyMjY1MjI4OTU=",
+      "name": "gl-image-processing-client",
+      "full_name": "Barbicane-fr/gl-image-processing-client",
+      "private": true
+    },
+    {
+      "id": 237764818,
+      "node_id": "MDEwOlJlcG9zaXRvcnkyMzc3NjQ4MTg=",
+      "name": "barbicane.fr",
+      "full_name": "Barbicane-fr/barbicane.fr",
+      "private": true
+    },
+    {
+      "id": 347315291,
+      "node_id": "MDEwOlJlcG9zaXRvcnkzNDczMTUyOTE=",
+      "name": "maston",
+      "full_name": "Barbicane-fr/maston",
+      "private": false
+    }
+  ],
+  "requester": null,
+  "sender": {
+    "login": "georgesbiaux",
+    "id": 22441392,
+    "node_id": "MDQ6VXNlcjIyNDQxMzky",
+    "avatar_url": "https://avatars.githubusercontent.com/u/22441392?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/georgesbiaux",
+    "html_url": "https://github.com/georgesbiaux",
+    "followers_url": "https://api.github.com/users/georgesbiaux/followers",
+    "following_url": "https://api.github.com/users/georgesbiaux/following{/other_user}",
+    "gists_url": "https://api.github.com/users/georgesbiaux/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/georgesbiaux/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/georgesbiaux/subscriptions",
+    "organizations_url": "https://api.github.com/users/georgesbiaux/orgs",
+    "repos_url": "https://api.github.com/users/georgesbiaux/repos",
+    "events_url": "https://api.github.com/users/georgesbiaux/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/georgesbiaux/received_events",
+    "type": "User",
+    "site_admin": false
+  }
+}
