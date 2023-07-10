@@ -19,3 +19,4 @@ features = [
 [dependencies]
 derive-getters = "0.3.0"
 mockall = "0.11.4"
+fake = "2.6.1"
