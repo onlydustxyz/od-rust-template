@@ -5,6 +5,7 @@ mod tests {
 	use bootstrap::bootstrap;
 	use fake::{Fake, Faker};
 	use postgres_adapter::config::postgres_configuration::PostgresConfiguration;
+	use rest_api_adapter::dto::user_dto_response::UserDtoResponse;
 	use rocket::{
 		http::{ContentType, Status},
 		local::blocking::Client,
@@ -57,9 +58,7 @@ mod tests {
 
 		// Then
 		assert_eq!(response.status(), Status::Ok);
-		assert_eq!(
-			format!("{{\"id\":\"{}\",\"name\":\"{}\"}}", "test", user_name),
-			response.into_string().unwrap()
-		);
+		let user_dto_response: UserDtoResponse = response.into_json().unwrap();
+		assert_eq!(user_name, user_dto_response.name);
 	}
 }

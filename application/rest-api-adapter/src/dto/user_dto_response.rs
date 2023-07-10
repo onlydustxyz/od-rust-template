@@ -1,7 +1,7 @@
-use rocket::serde::Serialize;
+use rocket::serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 #[serde(crate = "rocket::serde")]
 pub struct UserDtoResponse {
 	pub id: Uuid,
