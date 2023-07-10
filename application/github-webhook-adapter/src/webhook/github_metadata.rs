@@ -1,7 +1,7 @@
 use rocket::{
 	http::Status,
 	request::{FromRequest, Outcome},
-	Build, Request, Rocket,
+	Request,
 };
 
 pub static X_GITHUB_EVENT: &str = "X-GitHub-Event";

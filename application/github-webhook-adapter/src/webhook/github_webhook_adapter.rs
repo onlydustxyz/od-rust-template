@@ -1,22 +1,22 @@
 use std::sync::Arc;
 
 use domain::port::input::organization_facade_port::OrganizationFacadePort;
-use rocket::{
-	http::Status,
-	request::{FromRequest, Outcome},
-	Build, Request, Rocket, State,
-};
+use rocket::{Build, Rocket};
 
 use crate::webhook::github_metadata::GithubEventMetadata;
 
-pub struct GithubWebhookAdapter {}
+pub struct GithubWebhookAdapter {
+	organization_facade_port: Arc<dyn OrganizationFacadePort>,
+}
 
 impl GithubWebhookAdapter {
-	pub fn build_webhook(
-		&self,
-		rocket_builder: Rocket<Build>,
-		organization_facade_port: Arc<dyn OrganizationFacadePort + 'static>,
-	) -> Rocket<Build> {
+	pub fn build(organization_facade_port: Arc<dyn OrganizationFacadePort>) -> Self {
+		GithubWebhookAdapter {
+			organization_facade_port,
+		}
+	}
+
+	pub fn attach_webhook(&self, rocket_builder: Rocket<Build>) -> Rocket<Build> {
 		#[post(
 			"/github-app/webhook",
 			format = "application/json",
@@ -24,7 +24,6 @@ impl GithubWebhookAdapter {
 		)]
 		async fn consume_webhook(
 			github_event_metadata: GithubEventMetadata,
-			organization_facade_port: &State<Arc<dyn OrganizationFacadePort>>,
 			github_webhook_as_string: String,
 		) {
 			println!(
@@ -34,35 +33,26 @@ impl GithubWebhookAdapter {
 				github_event_metadata.github_event_signature
 			);
 		}
-		let _ = organization_facade_port
+		let _ = &self
+			.organization_facade_port
 			.create_organization("name_test".to_string(), "external_id_test".to_string());
 
-		rocket_builder
-			.manage(organization_facade_port)
-			.mount("/api/v1", routes![consume_webhook])
+		rocket_builder.mount("/api/v1", routes![consume_webhook])
 	}
 }
 
 #[cfg(test)]
 mod tests {
-	use std::{
-		cell::{Cell, RefCell},
-		sync::{Arc, RwLock},
-	};
+	use std::sync::Arc;
 
 	use domain::{
 		model::organization::Organization,
-		port::input::{
-			organization_facade_port,
-			organization_facade_port::{MockOrganizationFacadePort, OrganizationFacadePort},
-		},
+		port::input::organization_facade_port::OrganizationFacadePort,
 	};
 	use fake::{Fake, Faker};
-	use mockall::{mock, predicate};
 	use rocket::{
 		http::{ContentType, Header, Status},
 		local::blocking::Client,
-		serde::json::json,
 	};
 
 	use crate::webhook::{
@@ -74,16 +64,11 @@ mod tests {
 	fn should_consume_github_installation_event() {
 		// Given
 		let github_event = Faker.fake::<String>();
-		let rocket_builder = GithubWebhookAdapter {}
-			.build_webhook(rocket::build(), Arc::new(OrganizationFacadeDummy {}));
+		let rocket_builder = GithubWebhookAdapter::build(Arc::new(OrganizationFacadeDummy {}))
+			.attach_webhook(rocket::build());
 
 		// When
 		let client = Client::tracked(rocket_builder).expect("valid rocket instance");
-		organization_facade_mock.expect_create_organization().times(1).with(
-			predicate::eq("name_test".to_string()),
-			predicate::eq("external_id_test".to_string()),
-		);
-
 		let response = client
 			.post("/api/v1/github-app/webhook")
 			.body(github_event)
@@ -104,7 +89,14 @@ mod tests {
 			name: String,
 			external_id: String,
 		) -> Result<Organization, String> {
-			todo!()
+			println!(
+				"OrganizationFacadeDummy consuming name : {} and external_id {}",
+				name, external_id
+			);
+			Ok(Organization::create_from_name_and_external_id(
+				name,
+				external_id,
+			))
 		}
 	}
 }
